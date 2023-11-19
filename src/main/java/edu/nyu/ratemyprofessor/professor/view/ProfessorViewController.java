@@ -2,7 +2,8 @@ package edu.nyu.ratemyprofessor.professor.view;
 
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import edu.nyu.ratemyprofessor.professor.model.Professor;
-import edu.nyu.ratemyprofessor.professor.model.ProfessorDTO;
+import edu.nyu.ratemyprofessor.professor.model.ProfessorRatingDTO;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,58 +24,60 @@ public class ProfessorViewController {
     }
 
     // professor/{professorId} for professor detail page show
-    @GetMapping(path="/{professorId}")
-    public ResponseEntity<Optional<ProfessorDTO>> getProfessor (@PathVariable("professorId") Long professorId) {
+    @GetMapping(path = "/{professorId}")
+    public ResponseEntity<Optional<ProfessorRatingDTO>> getProfessor(@PathVariable("professorId") Long professorId) {
         Optional<Professor> professor = professorViewService.getProfessorDetailsById(professorId);
         if (professor.equals(null)) {
             return ResponseEntity.notFound().build();
         }
-        return ResponseEntity.ok(professor.map(Professor::toProfessorDTO));
+        return ResponseEntity.ok(professor.map(Professor::toProfessorRatingDTO));
     }
-
 
     // professor/list/{schoolId} for professor list showing in search listing
     // and card listing
-    @GetMapping(path="/list/{schoolId}")
-    public ResponseEntity<List<ProfessorDTO>> getProfessorListBySchool(
+    @GetMapping(path = "/list/{schoolId}")
+    public ResponseEntity<List<?>> getProfessorListBySchool(
             @PathVariable("schoolId") Long id,
             @RequestParam(required = true) Boolean includeDetails,
-            @RequestParam(required = false) String name){
+            @RequestParam(required = false) String name) {
         List<Professor> professors;
+        List<?> dtoList;
 
         // For search listing view
-        if (!includeDetails){
-            if (name != null && !name.trim().isEmpty()){
+        if (!includeDetails) {
+            if (name != null && !name.trim().isEmpty()) {
                 professors = professorViewService.getProfessorListBySchoolIdAndName(id, name, name);
-            }
-            else{
+            } else {
                 professors = professorViewService.getProfessorListBySchoolId(id);
             }
+            dtoList = professors.stream()
+                    .map(Professor::toProfessorDTO)
+                    .collect(Collectors.toList());
         }
 
         // For card listing view
-        else{
-            if (name != null && !name.trim().isEmpty()){
+        else {
+            if (name != null && !name.trim().isEmpty()) {
                 professors = professorViewService.getProfessorListDetailsBySchoolIdAndName(id, name, name);
-            }
-            else{
+            } else {
                 professors = professorViewService.getProfessorListDetailsBySchoolId(id);
             }
+            dtoList = professors.stream()
+                    .map(Professor::toProfessorRatingDTO)
+                    .collect(Collectors.toList());
         }
 
-        if (professors.isEmpty()){
+        if (professors.isEmpty()) {
             return ResponseEntity.notFound().build();
         }
-        return ResponseEntity.ok(professors.stream()
-                .map(Professor::toProfessorDTO)
-                .collect(Collectors.toList())
-        );
+
+        return ResponseEntity.ok(dtoList);
     }
 
     // professor/add for adding new professor
     @PostMapping(path = "add")
     // return type could be a new added professor or exception message
-    public ResponseEntity<?> addProfessor(@RequestBody ObjectNode objectNode){
+    public ResponseEntity<?> addProfessor(@RequestBody ObjectNode objectNode) {
         String firstName = objectNode.get("firstName").asText();
         String lastName = objectNode.get("lastName").asText();
         String schoolName = objectNode.get("schoolName").asText();
@@ -86,8 +89,7 @@ public class ProfessorViewController {
         try {
             professorViewService.addNewProfessor(newProfessor);
             return ResponseEntity.ok(Professor.toProfessorDTO(newProfessor));
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }

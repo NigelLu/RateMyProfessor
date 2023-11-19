@@ -1,6 +1,13 @@
 package edu.nyu.ratemyprofessor.professor.model;
 
+import edu.nyu.ratemyprofessor.objects.dtos.RatingDTO;
+import edu.nyu.ratemyprofessor.objects.models.Rating;
+import edu.nyu.ratemyprofessor.objects.models.Saving;
 import edu.nyu.ratemyprofessor.objects.models.School;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
 import javax.persistence.*;
 
 @Entity
@@ -24,6 +31,12 @@ public class Professor {
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "school", nullable = false)
     private School school;
+
+    @OneToMany(mappedBy = "professor")
+    private List<Rating> ratingList;
+
+    @OneToMany(mappedBy = "professor")
+    private List<Saving> savingList;
 
     public Professor() {
 
@@ -108,6 +121,22 @@ public class Professor {
         this.school = school;
     }
 
+    public List<Rating> getRatingList() {
+        return ratingList;
+    }
+
+    public void setRatingList(List<Rating> ratingList) {
+        this.ratingList = ratingList;
+    }
+
+    public List<Saving> getSavingList() {
+        return savingList;
+    }
+
+    public void setSavingList(List<Saving> savingList) {
+        this.savingList = savingList;
+    }
+
     public static ProfessorDTO toProfessorDTO(Professor professor) {
         ProfessorDTO dto = new ProfessorDTO();
         dto.setId(professor.getId());
@@ -116,6 +145,23 @@ public class Professor {
         dto.setDepartmentName(professor.getDepartmentName());
         dto.setSchoolId(professor.getSchoolId());
         dto.setSchoolName(professor.getSchoolName());
+        return dto;
+    }
+
+    public static ProfessorRatingDTO toProfessorRatingDTO(Professor professor) {
+        ProfessorRatingDTO dto = new ProfessorRatingDTO();
+        dto.setId(professor.getId());
+        dto.setFirstName(professor.getFirstName());
+        dto.setLastName(professor.getLastName());
+        dto.setDepartmentName(professor.getDepartmentName());
+        dto.setSchoolId(professor.getSchoolId());
+        dto.setSchoolName(professor.getSchoolName());
+
+        List<RatingDTO> ratingDTOList = professor.getRatingList().stream()
+                                                                .map(Rating::toRatingDTO)
+                                                                .collect(Collectors.toList());
+        
+        dto.setRatingDTOList(ratingDTOList);
         return dto;
     }
 }
