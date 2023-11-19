@@ -1,8 +1,6 @@
 package edu.nyu.ratemyprofessor.professor.view;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import edu.nyu.ratemyprofessor.objects.models.School;
 import edu.nyu.ratemyprofessor.professor.model.Professor;
 import edu.nyu.ratemyprofessor.professor.model.ProfessorDTO;
 import org.springframework.beans.factory.annotation.Autowired;

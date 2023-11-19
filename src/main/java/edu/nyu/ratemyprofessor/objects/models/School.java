@@ -17,6 +17,7 @@ public class School {
     private Long id;
 
     private String name;
+    
 
     @OneToMany(mappedBy = "school")
     private List<Professor> professorList;

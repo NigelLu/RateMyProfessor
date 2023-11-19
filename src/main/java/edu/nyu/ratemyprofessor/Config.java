@@ -2,7 +2,6 @@ package edu.nyu.ratemyprofessor;
 
 import edu.nyu.ratemyprofessor.objects.models.School;
 import edu.nyu.ratemyprofessor.objects.repos.SchoolRepository;
-import edu.nyu.ratemyprofessor.professor.repo.ProfessorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
@@ -12,13 +11,11 @@ import java.util.List;
 
 @Configuration
 public class Config {
-    private final ProfessorRepository professorRepository;
 
     private final SchoolRepository schoolRepository;
 
     @Autowired
-    public Config(ProfessorRepository professorRepository, SchoolRepository schoolRepository) {
-        this.professorRepository = professorRepository;
+    public Config(SchoolRepository schoolRepository) {
         this.schoolRepository = schoolRepository;
     }
 

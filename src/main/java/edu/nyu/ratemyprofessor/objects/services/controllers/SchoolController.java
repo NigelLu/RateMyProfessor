@@ -1,7 +1,6 @@
 package edu.nyu.ratemyprofessor.objects.services.controllers;
 
 import edu.nyu.ratemyprofessor.objects.dtos.SchoolDTO;
-import edu.nyu.ratemyprofessor.objects.models.School;
 import edu.nyu.ratemyprofessor.objects.services.interfaces.SchoolService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

@@ -1,8 +1,6 @@
 package edu.nyu.ratemyprofessor.professor.view;
 
 import edu.nyu.ratemyprofessor.professor.model.Professor;
-import org.apache.coyote.Response;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
