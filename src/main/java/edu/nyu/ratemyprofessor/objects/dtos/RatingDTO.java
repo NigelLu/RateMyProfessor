@@ -1,5 +1,7 @@
 package edu.nyu.ratemyprofessor.objects.dtos;
 
+import java.time.LocalDateTime;
+
 import edu.nyu.ratemyprofessor.utils.Grade;
 
 public class RatingDTO {
@@ -22,6 +24,8 @@ public class RatingDTO {
     private Long professorId;
 
     private Long userId;
+
+    private LocalDateTime dateTime;
 
     public Long getId() {
         return id;
@@ -103,5 +107,14 @@ public class RatingDTO {
         this.userId = userId;
     }
 
+    public LocalDateTime getDateTime() {
+        return dateTime;
+    }
+
+    public void setDateTime(LocalDateTime dateTime) {
+        this.dateTime = dateTime;
+    }
+
+    
     
 }

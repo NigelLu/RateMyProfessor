@@ -19,7 +19,9 @@ public class RatingServiceImpl implements RatingService {
 
     @Override
     public Rating addRating(Rating rating){
-        System.out.println(ratingRepository.count());
+        Long userId = rating.getUserId();
+        Long professorId = rating.getProfessorId();
+        
         return rating;
     }
 }

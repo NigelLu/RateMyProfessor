@@ -1,15 +1,18 @@
 package edu.nyu.ratemyprofessor.objects.models;
 
+import java.time.LocalDateTime;
+
 import javax.persistence.*;
 
 import edu.nyu.ratemyprofessor.objects.dtos.RatingDTO;
 import edu.nyu.ratemyprofessor.professor.model.Professor;
+import edu.nyu.ratemyprofessor.user.model.User;
 import edu.nyu.ratemyprofessor.utils.Grade;
 
 @Table
 @Entity
 public class Rating {
-    
+
     @Id
     @SequenceGenerator(name = "ratingSequence", sequenceName = "ratingSequence", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ratingSequence")
@@ -32,6 +35,8 @@ public class Rating {
     private Long professorId;
 
     private Long userId;
+
+    private LocalDateTime dateTime;
 
     @ManyToOne
     @JoinColumn(name = "professor")
@@ -141,7 +146,15 @@ public class Rating {
         this.professor = professor;
     }
 
-    public static RatingDTO toRatingDTO(Rating rating){
+    public LocalDateTime getDateTime() {
+        return dateTime;
+    }
+
+    public void setDateTime(LocalDateTime dateTime) {
+        this.dateTime = dateTime;
+    }
+
+    public static RatingDTO toRatingDTO(Rating rating) {
         RatingDTO dto = new RatingDTO();
         dto.setId(rating.getId());
         dto.setDifficulty(rating.getDifficulty());
@@ -152,8 +165,8 @@ public class Rating {
         dto.setProfessorId(rating.getProfessorId());
         dto.setUserId(rating.getUserId());
         dto.setReview(rating.getReview());
+        dto.setDateTime(rating.getDateTime());
         return dto;
     }
+
 }
-
-

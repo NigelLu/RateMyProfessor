@@ -3,11 +3,12 @@ package edu.nyu.ratemyprofessor.objects.services.interfaces;
 import edu.nyu.ratemyprofessor.objects.dtos.SchoolDTO;
 
 import java.util.List;
-import java.util.Optional;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
 
 public interface SchoolService {
 
     List<SchoolDTO> getSchools();
 
-    Optional<SchoolDTO> getSchool(Long id);
+    String getSchool(Long id) throws JsonProcessingException;
 }

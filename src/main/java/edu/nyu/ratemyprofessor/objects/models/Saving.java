@@ -4,6 +4,7 @@ import javax.persistence.*;
 
 import edu.nyu.ratemyprofessor.objects.dtos.SavingDTO;
 import edu.nyu.ratemyprofessor.professor.model.Professor;
+import edu.nyu.ratemyprofessor.user.model.User;
 
 @Table
 @Entity
@@ -71,4 +72,5 @@ public class Saving {
 
         return dto;
     }
+
 }

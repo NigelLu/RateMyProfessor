@@ -2,11 +2,10 @@ package edu.nyu.ratemyprofessor.objects.models;
 
 import edu.nyu.ratemyprofessor.objects.dtos.SchoolDTO;
 import edu.nyu.ratemyprofessor.professor.model.Professor;
-import edu.nyu.ratemyprofessor.professor.model.ProfessorDTO;
+
 import javax.persistence.*;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Entity
 @Table
@@ -58,14 +57,11 @@ public class School {
         this.professorList = professorList;
     }
 
+
     public static SchoolDTO toSchoolDTO(School school) {
         SchoolDTO dto = new SchoolDTO();
         dto.setId(school.getId());
         dto.setName(school.getName());
-        List<ProfessorDTO> professorDTOList = school.getProfessorList().stream()
-                .map(Professor::toProfessorDTO)
-                .collect(Collectors.toList());
-        dto.setProfessorDTOList(professorDTOList);
         return dto;
     }
 }

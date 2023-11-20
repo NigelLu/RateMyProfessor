@@ -1,4 +1,4 @@
-package edu.nyu.ratemyprofessor.professor.view;
+package edu.nyu.ratemyprofessor.professor.controller;
 
 import edu.nyu.ratemyprofessor.objects.models.School;
 import edu.nyu.ratemyprofessor.objects.repos.SchoolRepository;

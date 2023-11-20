@@ -1,4 +1,4 @@
-package edu.nyu.ratemyprofessor.professor.view;
+package edu.nyu.ratemyprofessor.professor.controller;
 
 import edu.nyu.ratemyprofessor.professor.model.Professor;
 

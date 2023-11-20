@@ -1,4 +1,4 @@
-package edu.nyu.ratemyprofessor.professor.view;
+package edu.nyu.ratemyprofessor.professor.controller;
 
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import edu.nyu.ratemyprofessor.professor.model.Professor;
@@ -27,6 +27,8 @@ public class ProfessorViewController {
     @GetMapping(path = "/{professorId}")
     public ResponseEntity<Optional<ProfessorRatingDTO>> getProfessor(@PathVariable("professorId") Long professorId) {
         Optional<Professor> professor = professorViewService.getProfessorDetailsById(professorId);
+
+        
         if (professor.equals(null)) {
             return ResponseEntity.notFound().build();
         }

@@ -2,8 +2,15 @@ package edu.nyu.ratemyprofessor.user.model;
 
 import lombok.*;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.validation.constraints.*;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -36,11 +43,6 @@ public class User {
     @NotBlank
     @Column(nullable = false)
     private String firstName;
-
-    @NonNull
-    @NotBlank
-    @Column(nullable = false)
-    private School school;
 
     private Number expectedYearOfGraduation;
 

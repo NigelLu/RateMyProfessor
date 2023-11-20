@@ -6,8 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+
 import java.util.List;
 import java.util.Optional;
+
+import javax.persistence.EntityNotFoundException;
 
 @CrossOrigin
 @RequestMapping(path = "school")
@@ -28,11 +32,16 @@ public class SchoolController {
     }
 
     @GetMapping(path = "/{id}")
-    public ResponseEntity<Optional<SchoolDTO>> getSchool (@PathVariable("id") Long id) {
-        Optional<SchoolDTO> school = schoolService.getSchool(id);
-        if (school.equals(null)) {
+    public ResponseEntity<String> getSchool (@PathVariable("id") Long id) {
+        try {
+            String result = schoolService.getSchool(id);
+            return ResponseEntity.ok(result);
+        }
+        catch (EntityNotFoundException e) {
             return ResponseEntity.notFound().build();
         }
-        return ResponseEntity.ok(school);
+        catch (JsonProcessingException e) {
+            return ResponseEntity.internalServerError().build();
+        }
     }
 }
