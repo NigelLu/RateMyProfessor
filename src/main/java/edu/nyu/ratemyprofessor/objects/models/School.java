@@ -2,6 +2,7 @@ package edu.nyu.ratemyprofessor.objects.models;
 
 import edu.nyu.ratemyprofessor.objects.dtos.SchoolDTO;
 import edu.nyu.ratemyprofessor.professor.model.Professor;
+import edu.nyu.ratemyprofessor.user.model.Student;
 
 import javax.persistence.*;
 
@@ -20,6 +21,9 @@ public class School {
 
     @OneToMany(mappedBy = "school")
     private List<Professor> professorList;
+
+    @OneToMany(mappedBy = "school")
+    private List<Student> studentList;
 
     public School() {
     }

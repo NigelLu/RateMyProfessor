@@ -18,7 +18,7 @@ import edu.nyu.ratemyprofessor.objects.models.*;
 
 @Data
 @Entity
-public class User {
+public class Student {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -46,4 +46,13 @@ public class User {
 
     private Number expectedYearOfGraduation;
 
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @JoinColumn(name = "school", nullable = false)
+    private School school;
+
+    @OneToMany(mappedBy = "student")
+    private List<Rating> ratinglList;
+
+    @OneToMany(mappedBy = "student")
+    private List<Saving> savingList;
 }

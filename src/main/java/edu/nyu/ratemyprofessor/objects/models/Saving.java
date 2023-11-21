@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 import edu.nyu.ratemyprofessor.objects.dtos.SavingDTO;
 import edu.nyu.ratemyprofessor.professor.model.Professor;
-import edu.nyu.ratemyprofessor.user.model.User;
+import edu.nyu.ratemyprofessor.user.model.Student;
 
 @Table
 @Entity
@@ -22,6 +22,10 @@ public class Saving {
     @ManyToOne
     @JoinColumn(name = "professor")
     private Professor professor;
+
+    @ManyToOne
+    @JoinColumn(name = "student")
+    private Student student;
 
     public Saving() {
     }
