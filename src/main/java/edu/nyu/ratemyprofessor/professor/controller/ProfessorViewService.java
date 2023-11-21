@@ -3,7 +3,6 @@ package edu.nyu.ratemyprofessor.professor.controller;
 import edu.nyu.ratemyprofessor.professor.model.Professor;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface ProfessorViewService {
 
@@ -25,6 +24,6 @@ public interface ProfessorViewService {
     Professor addNewProfessor(Professor professor) throws Exception;
 
     // get Professor details
-    Optional<Professor> getProfessorDetailsById(Long professorId);
+    Professor getProfessorDetailsById(Long professorId);
 
 }

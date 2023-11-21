@@ -72,9 +72,9 @@ public class ProfessorViewServiceImpl implements ProfessorViewService {
     }
 
     @Override
-    public Optional<Professor> getProfessorDetailsById(Long professorId) {
-        Optional<Professor> optionalProfessor = professorRepository.findById(professorId);
-        return optionalProfessor;
+    public Professor getProfessorDetailsById(Long professorId) {
+        Professor professor = professorRepository.findById(professorId).orElseThrow(() -> new EntityNotFoundException("Professor with id: " + professorId + " does not exist."));
+        return professor;
     }
 
 }

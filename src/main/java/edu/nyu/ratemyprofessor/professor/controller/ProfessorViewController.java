@@ -1,15 +1,15 @@
 package edu.nyu.ratemyprofessor.professor.controller;
 
 import edu.nyu.ratemyprofessor.professor.model.Professor;
-import edu.nyu.ratemyprofessor.professor.model.dtos.ProfessorRatingDTO;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
+
+import javax.persistence.EntityNotFoundException;
 
 @CrossOrigin
 @RequestMapping(path = "professor")
@@ -25,14 +25,14 @@ public class ProfessorViewController {
     // professor/{professorId} 
     // for professor detail page show
     @GetMapping(path = "/{professorId}")
-    public ResponseEntity<Optional<ProfessorRatingDTO>> getProfessor(@PathVariable("professorId") Long professorId) {
-        Optional<Professor> professor = professorViewService.getProfessorDetailsById(professorId);
-
-        
-        if (professor.equals(null)) {
-            return ResponseEntity.notFound().build();
+    public ResponseEntity<?> getProfessor(@PathVariable("professorId") Long professorId) {
+        try{
+            Professor professor = professorViewService.getProfessorDetailsById(professorId);
+            return ResponseEntity.ok(Professor.toProfessorRatingDTO(professor));
         }
-        return ResponseEntity.ok(professor.map(Professor::toProfessorRatingDTO));
+        catch (EntityNotFoundException e) {
+            return ResponseEntity.internalServerError().body(e.getMessage());
+        }
     }
 
     // professor/list/{schoolId} 
@@ -85,7 +85,7 @@ public class ProfessorViewController {
             professorViewService.addNewProfessor(newProfessor);
             return ResponseEntity.ok(Professor.toProfessorDTO(newProfessor));
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
+            return ResponseEntity.internalServerError().body(e.getMessage());
         }
     }
 }

@@ -28,13 +28,13 @@ public class SchoolController {
     }
 
     @GetMapping(path = "/{id}")
-    public ResponseEntity<Map<String, Object>> getSchool (@PathVariable("id") Long id) {
+    public ResponseEntity<?> getSchool (@PathVariable("id") Long id) {
         try {
             Map<String, Object> result = schoolService.getSchool(id);
             return ResponseEntity.ok(result);
         }
         catch (EntityNotFoundException e) {
-            return ResponseEntity.notFound().build();
+            return ResponseEntity.internalServerError().body(e.getMessage());
         }
     }
 }

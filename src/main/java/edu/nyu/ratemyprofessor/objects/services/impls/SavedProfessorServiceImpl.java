@@ -55,7 +55,7 @@ public class SavedProfessorServiceImpl implements SavedProfessorService {
     }
 
     @Override
-    public void deleteSavedProfessor(Long id) throws EntityNotFoundException{
+    public void deleteSavedProfessor(Long id) {
         Optional<SavedProfessor> savedProfessorOptional = savedProfessorRepository.findById(id);
         savedProfessorOptional.orElseThrow(() -> new EntityNotFoundException("Saved professor with id:" + id + " not exists"));
         savedProfessorRepository.deleteById(id);

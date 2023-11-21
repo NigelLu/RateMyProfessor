@@ -42,7 +42,7 @@ public class Config {
                         List.of(NYU, CMU)
                 );
 
-                Long id = new Long(1);
+                Long id = 1L;
                 NYU = schoolRepository.findById(id).orElseThrow(() -> new EntityNotFoundException());
 
                 Student student = new Student(
