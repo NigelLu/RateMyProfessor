@@ -3,13 +3,14 @@ package edu.nyu.ratemyprofessor.objects.models;
 import edu.nyu.ratemyprofessor.objects.dtos.SchoolDTO;
 import edu.nyu.ratemyprofessor.professor.model.Professor;
 import edu.nyu.ratemyprofessor.user.model.Student;
+import lombok.Data;
 
 import javax.persistence.*;
 
 import java.util.List;
 
 @Entity
-@Table
+@Data
 public class School {
     @Id
     @SequenceGenerator(name = "schoolSequence", sequenceName = "schoolSequence", allocationSize = 1)
@@ -36,31 +37,6 @@ public class School {
         this.id = id;
         this.name = name;
     }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public List<Professor> getProfessorList() {
-        return professorList;
-    }
-
-    public void setProfessorList(List<Professor> professorList) {
-        this.professorList = professorList;
-    }
-
 
     public static SchoolDTO toSchoolDTO(School school) {
         SchoolDTO dto = new SchoolDTO();

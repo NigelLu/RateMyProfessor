@@ -2,8 +2,10 @@ package edu.nyu.ratemyprofessor.professor.model;
 
 import edu.nyu.ratemyprofessor.objects.dtos.RatingDTO;
 import edu.nyu.ratemyprofessor.objects.models.Rating;
-import edu.nyu.ratemyprofessor.objects.models.Saving;
+import edu.nyu.ratemyprofessor.objects.models.SavedProfessor;
 import edu.nyu.ratemyprofessor.objects.models.School;
+import edu.nyu.ratemyprofessor.professor.model.dtos.ProfessorRatingDTO;
+import lombok.Data;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -11,7 +13,7 @@ import java.util.stream.Collectors;
 import javax.persistence.*;
 
 @Entity
-@Table
+@Data
 public class Professor {
     @Id
     @SequenceGenerator(name = "professorSequence", sequenceName = "professorSequence", allocationSize = 1)
@@ -36,7 +38,7 @@ public class Professor {
     private List<Rating> ratingList;
 
     @OneToMany(mappedBy = "professor")
-    private List<Saving> savingList;
+    private List<SavedProfessor> savedProfessorList;
 
     public Professor() {
 
@@ -63,78 +65,6 @@ public class Professor {
         this.lastName = lastName;
         this.schoolName = schoolName;
         this.departmentName = departmentName;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public Long getSchoolId() {
-        return schoolId;
-    }
-
-    public void setSchoolId(Long schoolId) {
-        this.schoolId = schoolId;
-    }
-
-    public String getSchoolName() {
-        return schoolName;
-    }
-
-    public void setSchoolName(String schoolName) {
-        this.schoolName = schoolName;
-    }
-
-    public String getDepartmentName() {
-        return departmentName;
-    }
-
-    public void setDepartmentName(String departmentName) {
-        this.departmentName = departmentName;
-    }
-
-    public School getSchool() {
-        return school;
-    }
-
-    public void setSchool(School school) {
-        this.school = school;
-    }
-
-    public List<Rating> getRatingList() {
-        return ratingList;
-    }
-
-    public void setRatingList(List<Rating> ratingList) {
-        this.ratingList = ratingList;
-    }
-
-    public List<Saving> getSavingList() {
-        return savingList;
-    }
-
-    public void setSavingList(List<Saving> savingList) {
-        this.savingList = savingList;
     }
 
     public static ProfessorDTO toProfessorDTO(Professor professor) {

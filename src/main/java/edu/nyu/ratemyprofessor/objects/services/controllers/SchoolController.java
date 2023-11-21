@@ -6,10 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-
 import java.util.List;
-import java.util.Optional;
+import java.util.Map;
 
 import javax.persistence.EntityNotFoundException;
 
@@ -18,8 +16,6 @@ import javax.persistence.EntityNotFoundException;
 @RestController
 public class SchoolController {
     private final SchoolService schoolService;
-
-
 
     @Autowired
     public SchoolController(SchoolService schoolService) {
@@ -32,16 +28,13 @@ public class SchoolController {
     }
 
     @GetMapping(path = "/{id}")
-    public ResponseEntity<String> getSchool (@PathVariable("id") Long id) {
+    public ResponseEntity<Map<String, Object>> getSchool (@PathVariable("id") Long id) {
         try {
-            String result = schoolService.getSchool(id);
+            Map<String, Object> result = schoolService.getSchool(id);
             return ResponseEntity.ok(result);
         }
         catch (EntityNotFoundException e) {
             return ResponseEntity.notFound().build();
-        }
-        catch (JsonProcessingException e) {
-            return ResponseEntity.internalServerError().build();
         }
     }
 }

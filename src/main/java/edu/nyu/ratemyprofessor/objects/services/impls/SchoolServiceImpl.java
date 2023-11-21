@@ -11,12 +11,9 @@ import edu.nyu.ratemyprofessor.professor.repo.ProfessorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.ObjectNode;
-
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -41,9 +38,7 @@ public class SchoolServiceImpl implements SchoolService {
                 .collect(Collectors.toList());
     }
 
-
-
-    public String getSchool(Long id) throws JsonProcessingException {
+    public Map<String, Object> getSchool(Long id){
         Optional<School> school = schoolRepository.findById(id);
         SchoolDTO schoolEntity = School.toSchoolDTO(school.orElseThrow(() -> new EntityNotFoundException("School not found with id: " + id)));
 
@@ -52,16 +47,10 @@ public class SchoolServiceImpl implements SchoolService {
                                                             .map(Professor::toProfessorDTO)
                                                             .toList();
 
-        ObjectMapper mapper = new ObjectMapper();
-
-        ObjectNode objectNode = mapper.createObjectNode();
-        String jsonSchool = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(schoolEntity);
-        String jsonProfessor = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(professorDTOList);
-        objectNode.put("school", jsonSchool);
-        objectNode.put("professor", jsonProfessor);
-
-        String jsonObjectNode = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(objectNode);
+        Map<String, Object> response = new HashMap<>();
+        response.put("school", schoolEntity);
+        response.put("professor", professorDTOList);
         
-        return jsonObjectNode;
+        return response;
     }
 }

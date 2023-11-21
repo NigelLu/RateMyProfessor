@@ -1,8 +1,7 @@
 package edu.nyu.ratemyprofessor.professor.controller;
 
-import com.fasterxml.jackson.databind.node.ObjectNode;
 import edu.nyu.ratemyprofessor.professor.model.Professor;
-import edu.nyu.ratemyprofessor.professor.model.ProfessorRatingDTO;
+import edu.nyu.ratemyprofessor.professor.model.dtos.ProfessorRatingDTO;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -23,7 +22,8 @@ public class ProfessorViewController {
         this.professorViewService = professorViewService;
     }
 
-    // professor/{professorId} for professor detail page show
+    // professor/{professorId} 
+    // for professor detail page show
     @GetMapping(path = "/{professorId}")
     public ResponseEntity<Optional<ProfessorRatingDTO>> getProfessor(@PathVariable("professorId") Long professorId) {
         Optional<Professor> professor = professorViewService.getProfessorDetailsById(professorId);
@@ -35,8 +35,8 @@ public class ProfessorViewController {
         return ResponseEntity.ok(professor.map(Professor::toProfessorRatingDTO));
     }
 
-    // professor/list/{schoolId} for professor list showing in search listing
-    // and card listing
+    // professor/list/{schoolId} 
+    // for professor list showing in search listing and card listing
     @GetMapping(path = "/list/{schoolId}")
     public ResponseEntity<List<?>> getProfessorListBySchool(
             @PathVariable("schoolId") Long id,
@@ -76,18 +76,11 @@ public class ProfessorViewController {
         return ResponseEntity.ok(dtoList);
     }
 
-    // professor/add for adding new professor
+    // professor/add 
+    // for adding new professor
     @PostMapping(path = "add")
     // return type could be a new added professor or exception message
-    public ResponseEntity<?> addProfessor(@RequestBody ObjectNode objectNode) {
-        String firstName = objectNode.get("firstName").asText();
-        String lastName = objectNode.get("lastName").asText();
-        String schoolName = objectNode.get("schoolName").asText();
-        String departmentName = objectNode.get("departmentName").asText();
-        Long schoolId = objectNode.get("schoolId").asLong();
-
-        Professor newProfessor = new Professor(firstName, lastName, schoolName, departmentName, schoolId);
-
+    public ResponseEntity<?> addProfessor(@RequestBody Professor newProfessor) {
         try {
             professorViewService.addNewProfessor(newProfessor);
             return ResponseEntity.ok(Professor.toProfessorDTO(newProfessor));

@@ -1,9 +1,9 @@
 package edu.nyu.ratemyprofessor.objects.dtos;
 
-public class SavingDTO {
+public class SavedProfessorDTO {
     private Long id;
 
-    private Long userId;
+    private Long studentId;
 
     private Long professorId;
 
@@ -15,12 +15,12 @@ public class SavingDTO {
         this.id = id;
     }
 
-    public Long getUserId() {
-        return userId;
+    public Long getStudentId() {
+        return studentId;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public void setStudentId(Long studentId) {
+        this.studentId = studentId;
     }
 
     public Long getProfessorId() {

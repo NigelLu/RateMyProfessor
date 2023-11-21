@@ -23,7 +23,7 @@ public class RatingDTO {
 
     private Long professorId;
 
-    private Long userId;
+    private Long studentId;
 
     private LocalDateTime dateTime;
 
@@ -99,12 +99,12 @@ public class RatingDTO {
         this.professorId = professorId;
     }
 
-    public Long getUserId() {
-        return userId;
+    public Long getStudentId() {
+        return studentId;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public void setStudentId(Long studentId) {
+        this.studentId = studentId;
     }
 
     public LocalDateTime getDateTime() {

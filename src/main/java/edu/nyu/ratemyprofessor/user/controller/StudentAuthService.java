@@ -1,5 +1,5 @@
 package edu.nyu.ratemyprofessor.user.controller;
 
-public class UserController {
-  
+public interface StudentAuthService {
+    
 }
