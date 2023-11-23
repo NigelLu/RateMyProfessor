@@ -40,33 +40,6 @@ public class Professor {
     @OneToMany(mappedBy = "professor")
     private List<SavedProfessor> savedProfessorList;
 
-    public Professor() {
-
-    }
-
-    public Professor(String firstName, String lastName, String schoolName, String departmentName) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.schoolName = schoolName;
-        this.departmentName = departmentName;
-    }
-
-    public Professor(String firstName, String lastName, String schoolName, String departmentName, Long schoolId) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.schoolName = schoolName;
-        this.departmentName = departmentName;
-        this.schoolId = schoolId;
-    }
-
-    public Professor(Long id, String firstName, String lastName, String schoolName, String departmentName) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.schoolName = schoolName;
-        this.departmentName = departmentName;
-    }
-
     public static ProfessorDTO toProfessorDTO(Professor professor) {
         ProfessorDTO dto = new ProfessorDTO();
         dto.setId(professor.getId());

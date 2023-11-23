@@ -47,22 +47,6 @@ public class Rating {
     @JoinColumn(name = "student")
     private Student student;
 
-    public Rating() {
-    }
-
-    public Rating(Float rating, Float difficulty, boolean takeAgain, boolean takenForCredit,
-            boolean attendanceMandatory, Grade grade, String review, Long professorId, Long studentId) {
-        this.rating = rating;
-        this.difficulty = difficulty;
-        this.takeAgain = takeAgain;
-        this.takenForCredit = takenForCredit;
-        this.attendanceMandatory = attendanceMandatory;
-        this.grade = grade;
-        this.review = review;
-        this.professorId = professorId;
-        this.studentId = studentId;
-    }
-
     public static RatingDTO toRatingDTO(Rating rating) {
         RatingDTO dto = new RatingDTO();
         dto.setId(rating.getId());

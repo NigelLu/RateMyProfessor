@@ -28,15 +28,6 @@ public class SavedProfessor{
     @JoinColumn(name = "student")
     private Student student;
 
-    public SavedProfessor() {
-    }
-
-    // press space to select different attributes
-    public SavedProfessor(Long studentId, Long professorId) {
-        this.studentId = studentId;
-        this.professorId = professorId;
-    }
-
     public static SavedProfessorDTO toSavedProfessorDTO(SavedProfessor savedProfessor) {
         SavedProfessorDTO dto = new SavedProfessorDTO();
         dto.setId(savedProfessor.getId());
