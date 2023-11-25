@@ -30,6 +30,16 @@ public class Professor {
 
     private String departmentName;
 
+    public Professor() {
+    }
+
+    public Professor(String firstName, String lastName, String schoolName, String departmentName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.schoolName = schoolName;
+        this.departmentName = departmentName;
+    }
+
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "school", nullable = false)
     private School school;
