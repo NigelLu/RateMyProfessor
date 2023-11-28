@@ -6,7 +6,7 @@ import javax.persistence.*;
 
 import edu.nyu.ratemyprofessor.objects.dtos.RatingDTO;
 import edu.nyu.ratemyprofessor.professor.model.Professor;
-import edu.nyu.ratemyprofessor.user.model.Student;
+import edu.nyu.ratemyprofessor.student.model.Student;
 import edu.nyu.ratemyprofessor.utils.Grade;
 import lombok.Data;
 

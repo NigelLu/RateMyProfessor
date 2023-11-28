@@ -1,4 +1,4 @@
-package edu.nyu.ratemyprofessor.user.model;
+package edu.nyu.ratemyprofessor.student.model;
 
 import lombok.*;
 import javax.persistence.Id;
@@ -19,8 +19,8 @@ import javax.persistence.GenerationType;
 import edu.nyu.ratemyprofessor.objects.dtos.RatingDTO;
 import edu.nyu.ratemyprofessor.objects.dtos.SavedProfessorDTO;
 import edu.nyu.ratemyprofessor.objects.models.*;
-import edu.nyu.ratemyprofessor.user.model.dtos.StudentRatingDTO;
-import edu.nyu.ratemyprofessor.user.model.dtos.StudentSavedProfessorDTO;
+import edu.nyu.ratemyprofessor.student.model.dtos.StudentRatingDTO;
+import edu.nyu.ratemyprofessor.student.model.dtos.StudentSavedProfessorDTO;
 
 @Data
 @Entity

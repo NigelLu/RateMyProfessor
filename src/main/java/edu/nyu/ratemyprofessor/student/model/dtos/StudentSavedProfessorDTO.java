@@ -1,9 +1,9 @@
-package edu.nyu.ratemyprofessor.user.model.dtos;
+package edu.nyu.ratemyprofessor.student.model.dtos;
 
 import java.util.List;
 
 import edu.nyu.ratemyprofessor.objects.dtos.SavedProfessorDTO;
-import edu.nyu.ratemyprofessor.user.model.StudentDTO;
+import edu.nyu.ratemyprofessor.student.model.StudentDTO;
 
 public class StudentSavedProfessorDTO extends StudentDTO{
     private List<SavedProfessorDTO> savedProfessorDTOList;

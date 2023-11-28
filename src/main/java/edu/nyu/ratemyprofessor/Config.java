@@ -4,8 +4,8 @@ import edu.nyu.ratemyprofessor.objects.models.School;
 import edu.nyu.ratemyprofessor.objects.repos.SchoolRepository;
 import edu.nyu.ratemyprofessor.professor.model.Professor;
 import edu.nyu.ratemyprofessor.professor.repo.ProfessorRepository;
-import edu.nyu.ratemyprofessor.user.model.Student;
-import edu.nyu.ratemyprofessor.user.repository.StudentRepository;
+import edu.nyu.ratemyprofessor.student.model.Student;
+import edu.nyu.ratemyprofessor.student.repository.StudentRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;

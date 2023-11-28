@@ -1,4 +1,4 @@
-package edu.nyu.ratemyprofessor.user.model;
+package edu.nyu.ratemyprofessor.student.model;
 
 public class StudentDTO {
     private Long id;

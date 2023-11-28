@@ -1,4 +1,4 @@
-package edu.nyu.ratemyprofessor.user.controller;
+package edu.nyu.ratemyprofessor.student.controller;
 
 public class StudentAuthServiceImpl implements StudentAuthService{
     

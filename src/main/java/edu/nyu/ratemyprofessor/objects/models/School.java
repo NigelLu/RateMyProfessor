@@ -2,7 +2,7 @@ package edu.nyu.ratemyprofessor.objects.models;
 
 import edu.nyu.ratemyprofessor.objects.dtos.SchoolDTO;
 import edu.nyu.ratemyprofessor.professor.model.Professor;
-import edu.nyu.ratemyprofessor.user.model.Student;
+import edu.nyu.ratemyprofessor.student.model.Student;
 import lombok.Data;
 
 import javax.persistence.*;

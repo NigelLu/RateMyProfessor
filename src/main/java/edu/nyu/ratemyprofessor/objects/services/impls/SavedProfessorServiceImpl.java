@@ -10,8 +10,8 @@ import org.springframework.stereotype.Service;
 import edu.nyu.ratemyprofessor.objects.services.interfaces.SavedProfessorService;
 import edu.nyu.ratemyprofessor.professor.model.Professor;
 import edu.nyu.ratemyprofessor.professor.repo.ProfessorRepository;
-import edu.nyu.ratemyprofessor.user.model.Student;
-import edu.nyu.ratemyprofessor.user.repository.StudentRepository;
+import edu.nyu.ratemyprofessor.student.model.Student;
+import edu.nyu.ratemyprofessor.student.repository.StudentRepository;
 import edu.nyu.ratemyprofessor.objects.models.SavedProfessor;
 import edu.nyu.ratemyprofessor.objects.repos.SavedProfessorRepository;
 

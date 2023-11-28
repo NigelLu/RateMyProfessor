@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 import edu.nyu.ratemyprofessor.objects.dtos.SavedProfessorDTO;
 import edu.nyu.ratemyprofessor.professor.model.Professor;
-import edu.nyu.ratemyprofessor.user.model.Student;
+import edu.nyu.ratemyprofessor.student.model.Student;
 import lombok.Data;
 
 @Data
