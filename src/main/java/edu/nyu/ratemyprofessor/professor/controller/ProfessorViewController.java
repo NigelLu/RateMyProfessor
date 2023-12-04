@@ -68,10 +68,6 @@ public class ProfessorViewController {
                     .collect(Collectors.toList());
         }
 
-        if (professors.isEmpty()) {
-            return ResponseEntity.notFound().build();
-        }
-
         return ResponseEntity.ok(dtoList);
     }
 
