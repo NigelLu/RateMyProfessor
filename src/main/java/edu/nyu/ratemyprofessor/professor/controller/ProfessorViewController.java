@@ -22,20 +22,19 @@ public class ProfessorViewController {
         this.professorViewService = professorViewService;
     }
 
-    // professor/{professorId} 
+    // professor/{professorId}
     // for professor detail page show
     @GetMapping(path = "/{professorId}")
     public ResponseEntity<?> getProfessor(@PathVariable("professorId") Long professorId) {
-        try{
+        try {
             Professor professor = professorViewService.getProfessorDetailsById(professorId);
             return ResponseEntity.ok(Professor.toProfessorRatingDTO(professor));
-        }
-        catch (EntityNotFoundException e) {
+        } catch (EntityNotFoundException e) {
             return ResponseEntity.internalServerError().body(e.getMessage());
         }
     }
 
-    // professor/list/{schoolId} 
+    // professor/list/{schoolId}
     // for professor list showing in search listing and card listing
     @GetMapping(path = "/list/{schoolId}")
     public ResponseEntity<List<?>> getProfessorListBySchool(
@@ -76,7 +75,7 @@ public class ProfessorViewController {
         return ResponseEntity.ok(dtoList);
     }
 
-    // professor/add 
+    // professor/add
     // for adding new professor
     @PostMapping(path = "add")
     // return type could be a new added professor or exception message

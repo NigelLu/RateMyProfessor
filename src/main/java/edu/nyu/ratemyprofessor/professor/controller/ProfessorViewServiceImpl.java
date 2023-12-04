@@ -42,6 +42,7 @@ public class ProfessorViewServiceImpl implements ProfessorViewService {
 
     @Override
     public List<Professor> getProfessorListDetailsBySchoolIdAndName(Long schoolId, String firstName, String lastName) {
+        System.out.println("test: " + schoolId + firstName + lastName);
         // need to add ratings return
         return professorRepository.findBySchoolIdAndFirstNameContainingOrLastNameContaining(schoolId, firstName,
                 lastName);

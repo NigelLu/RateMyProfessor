@@ -10,15 +10,15 @@ public interface ProfessorViewService {
     List<Professor> getProfessorListBySchoolId(Long schoolId);
 
     List<Professor> getProfessorListBySchoolIdAndName(Long schoolId,
-                                                      String firstName,
-                                                      String lastName);
+            String firstName,
+            String lastName);
 
     // for card listing view, also returns rating information
     List<Professor> getProfessorListDetailsBySchoolId(Long schoolId);
 
     List<Professor> getProfessorListDetailsBySchoolIdAndName(Long schoolId,
-                                                             String firstName,
-                                                             String lastName);
+            String firstName,
+            String lastName);
 
     // add new Professor
     Professor addNewProfessor(Professor professor) throws Exception;
