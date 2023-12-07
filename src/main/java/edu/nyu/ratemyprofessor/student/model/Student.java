@@ -5,10 +5,12 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.UniqueConstraint;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.persistence.Table;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -16,14 +18,17 @@ import javax.validation.constraints.*;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 
+import org.json.*;
 import edu.nyu.ratemyprofessor.objects.dtos.RatingDTO;
 import edu.nyu.ratemyprofessor.objects.dtos.SavedProfessorDTO;
 import edu.nyu.ratemyprofessor.objects.models.*;
+import edu.nyu.ratemyprofessor.student.model.dtos.StudentDTO;
 import edu.nyu.ratemyprofessor.student.model.dtos.StudentRatingDTO;
 import edu.nyu.ratemyprofessor.student.model.dtos.StudentSavedProfessorDTO;
 
 @Data
 @Entity
+@Table(name = "Student", uniqueConstraints = { @UniqueConstraint(columnNames = { "email" }) })
 public class Student {
 
     @Id
@@ -63,7 +68,7 @@ public class Student {
 
     @OneToMany(mappedBy = "student")
     private List<SavedProfessor> savedProfessorList;
-    
+
     public Student() {
     }
 
@@ -85,7 +90,7 @@ public class Student {
         dto.setLastName(student.getLastName());
         dto.setPassword(student.getPassword());
         return dto;
-    } 
+    }
 
     public static StudentRatingDTO toStudentRatingDTO(Student student) {
         StudentRatingDTO dto = new StudentRatingDTO();
@@ -95,10 +100,10 @@ public class Student {
         dto.setFirstName(student.getFirstName());
         dto.setLastName(student.getLastName());
         dto.setPassword(student.getPassword());
-        
+
         List<RatingDTO> ratingDTOList = student.getRatinglList().stream()
-                                                                .map(Rating::toRatingDTO)
-                                                                .collect(Collectors.toList());
+                .map(Rating::toRatingDTO)
+                .collect(Collectors.toList());
 
         dto.setRatingDTOList(ratingDTOList);
         return dto;
@@ -114,10 +119,27 @@ public class Student {
         dto.setPassword(student.getPassword());
 
         List<SavedProfessorDTO> savedProfessorDTOList = student.getSavedProfessorList().stream()
-                                                                .map(SavedProfessor::toSavedProfessorDTO)
-                                                                .collect(Collectors.toList());
+                .map(SavedProfessor::toSavedProfessorDTO)
+                .collect(Collectors.toList());
 
         dto.setSavedProfessorDTOList(savedProfessorDTOList);
         return dto;
+    }
+
+    public static String toJsonString(Student student) {
+        JSONObject studentJsonObject = new JSONObject();
+        studentJsonObject.put("id", student.getId());
+        studentJsonObject.put("email", student.getEmail());
+        studentJsonObject.put("schoolId", student.getSchoolId());
+        studentJsonObject.put("lastName", student.getLastName());
+        studentJsonObject.put("firstName", student.getFirstName());
+        studentJsonObject.put("ratinglList",
+                new JSONArray(student.getRatinglList().stream().map(Rating::toRatingDTO).toArray()).toString());
+        studentJsonObject.put("expectedYearOfGraduation", student.getExpectedYearOfGraduation());
+        studentJsonObject.put("savedProfessorList",
+                new JSONArray(
+                        student.getSavedProfessorList().stream().map(SavedProfessor::toSavedProfessorDTO).toArray())
+                        .toString());
+        return studentJsonObject.toString();
     }
 }

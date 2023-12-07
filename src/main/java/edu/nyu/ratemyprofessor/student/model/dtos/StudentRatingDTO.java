@@ -3,7 +3,6 @@ package edu.nyu.ratemyprofessor.student.model.dtos;
 import java.util.List;
 
 import edu.nyu.ratemyprofessor.objects.dtos.RatingDTO;
-import edu.nyu.ratemyprofessor.student.model.StudentDTO;
 
 public class StudentRatingDTO extends StudentDTO{
     private List<RatingDTO> ratingDTOList;

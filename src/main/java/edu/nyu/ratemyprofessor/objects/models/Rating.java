@@ -60,6 +60,7 @@ public class Rating {
         dto.setStudentId(rating.getStudentId());
         dto.setReview(rating.getReview());
         dto.setDateTime(rating.getDateTime());
+        dto.setStudentId(rating.getStudentId());
         return dto;
     }
 

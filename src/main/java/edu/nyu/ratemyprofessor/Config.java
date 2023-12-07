@@ -4,6 +4,7 @@ import edu.nyu.ratemyprofessor.objects.models.School;
 import edu.nyu.ratemyprofessor.objects.repos.SchoolRepository;
 import edu.nyu.ratemyprofessor.professor.model.Professor;
 import edu.nyu.ratemyprofessor.professor.repo.ProfessorRepository;
+import edu.nyu.ratemyprofessor.student.controller.StudentServiceImpl;
 import edu.nyu.ratemyprofessor.student.model.Student;
 import edu.nyu.ratemyprofessor.student.repository.StudentRepository;
 
@@ -27,14 +28,17 @@ public class Config {
     private final SchoolRepository schoolRepository;
     private final StudentRepository studentRepository;
     private final ProfessorRepository professorRepository;
+    private final StudentServiceImpl studentServiceImpl;
     private ApplicationContext applicationContext;
 
     @Autowired
     public Config(SchoolRepository schoolRepository, StudentRepository studentRepository,
-            ProfessorRepository professorRepository, ApplicationContext applicationContext) {
+            ProfessorRepository professorRepository, ApplicationContext applicationContext,
+            StudentServiceImpl studentServiceImpl) {
         this.schoolRepository = schoolRepository;
         this.studentRepository = studentRepository;
         this.professorRepository = professorRepository;
+        this.studentServiceImpl = studentServiceImpl;
         this.applicationContext = applicationContext;
     }
 
@@ -67,7 +71,6 @@ public class Config {
                                 default:
                             }
                         }
-                        System.out.println();
                     }
                     schoolWorkbook.close();
                     schoolInputStream.close();
@@ -118,7 +121,8 @@ public class Config {
                         School thisSchool = schoolRepository.findByName(schoolNameBuffer.toString())
                                 .orElseThrow(() -> new EntityNotFoundException(
                                         "School '" + schoolNameBuffer.toString() + "' not found."
-                                        + " Professor name: " + firstNameBuffer.toString() + " " + lastNameBuffer.toString()));
+                                                + " Professor name: " + firstNameBuffer.toString() + " "
+                                                + lastNameBuffer.toString()));
                         newProfessor.setSchool(thisSchool);
                         newProfessor.setSchoolId(thisSchool.getId());
                         professorRepository.save(newProfessor);
@@ -141,7 +145,7 @@ public class Config {
 
                 student.setSchool(NYU);
 
-                studentRepository.save(student);
+                studentServiceImpl.addNewStudent(student);
             }
         };
     }
