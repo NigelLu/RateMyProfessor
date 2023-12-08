@@ -1,15 +1,17 @@
 package edu.nyu.ratemyprofessor.student.controller;
 
-import java.util.Optional;
+import javax.persistence.EntityNotFoundException;
 
 import edu.nyu.ratemyprofessor.student.model.Student;
 
 public interface StudentService {
-  Optional<Student> getStudentDetailById(Long studentId);
+  Student getStudentDetailById(Long studentId) throws EntityNotFoundException;
 
-  Optional<Student> getStudentDetailByEmail(String email);
+  Student getStudentDetailByEmail(String email) throws EntityNotFoundException;
 
   Student addNewStudent(Student student) throws Exception;
+
+  Student updateStudent(Student student) throws Exception;
 
   boolean authenticateStudent(String email, String password);
 }

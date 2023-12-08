@@ -141,6 +141,7 @@ public class Config {
                         NYU.getId());
 
                 student.setSchool(NYU);
+                student.setExpectedYearOfGraduation(2025);
 
                 studentServiceImpl.addNewStudent(student);
 

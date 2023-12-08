@@ -1,19 +1,19 @@
 package edu.nyu.ratemyprofessor.objects.services.impls;
 
-import edu.nyu.ratemyprofessor.objects.dtos.SchoolDTO;
 import edu.nyu.ratemyprofessor.objects.models.School;
-import edu.nyu.ratemyprofessor.objects.repos.SchoolRepository;
-import edu.nyu.ratemyprofessor.objects.services.interfaces.SchoolService;
+import edu.nyu.ratemyprofessor.objects.dtos.SchoolDTO;
 import edu.nyu.ratemyprofessor.professor.model.Professor;
 import edu.nyu.ratemyprofessor.professor.model.ProfessorDTO;
+import edu.nyu.ratemyprofessor.objects.repos.SchoolRepository;
 import edu.nyu.ratemyprofessor.professor.repo.ProfessorRepository;
+import edu.nyu.ratemyprofessor.objects.services.interfaces.SchoolService;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
+import java.util.List;
+import java.util.HashMap;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
