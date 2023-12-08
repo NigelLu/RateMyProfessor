@@ -6,7 +6,6 @@ import edu.nyu.ratemyprofessor.professor.model.Professor;
 import edu.nyu.ratemyprofessor.professor.repo.ProfessorRepository;
 import edu.nyu.ratemyprofessor.student.controller.StudentServiceImpl;
 import edu.nyu.ratemyprofessor.student.model.Student;
-import edu.nyu.ratemyprofessor.student.repository.StudentRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -26,17 +25,15 @@ import org.springframework.core.io.Resource;
 public class Config {
 
     private final SchoolRepository schoolRepository;
-    private final StudentRepository studentRepository;
     private final ProfessorRepository professorRepository;
     private final StudentServiceImpl studentServiceImpl;
     private ApplicationContext applicationContext;
 
     @Autowired
-    public Config(SchoolRepository schoolRepository, StudentRepository studentRepository,
-            ProfessorRepository professorRepository, ApplicationContext applicationContext,
+    public Config(SchoolRepository schoolRepository, ProfessorRepository professorRepository,
+            ApplicationContext applicationContext,
             StudentServiceImpl studentServiceImpl) {
         this.schoolRepository = schoolRepository;
-        this.studentRepository = studentRepository;
         this.professorRepository = professorRepository;
         this.studentServiceImpl = studentServiceImpl;
         this.applicationContext = applicationContext;
@@ -146,6 +143,7 @@ public class Config {
                 student.setSchool(NYU);
 
                 studentServiceImpl.addNewStudent(student);
+
             }
         };
     }

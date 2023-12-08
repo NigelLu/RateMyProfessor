@@ -7,6 +7,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.UniqueConstraint;
 
+import java.lang.reflect.Array;
+import java.sql.Savepoint;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -133,12 +136,17 @@ public class Student {
         studentJsonObject.put("schoolId", student.getSchoolId());
         studentJsonObject.put("lastName", student.getLastName());
         studentJsonObject.put("firstName", student.getFirstName());
+        List<Rating> studentRatingList = student.getRatinglList();
+        List<SavedProfessor> savedProfessorList = student.getSavedProfessorList();
         studentJsonObject.put("ratinglList",
-                new JSONArray(student.getRatinglList().stream().map(Rating::toRatingDTO).toArray()).toString());
+                new JSONArray(studentRatingList != null ? studentRatingList.stream().map(Rating::toRatingDTO).toArray()
+                        : new ArrayList<Rating>().toArray()).toString());
         studentJsonObject.put("expectedYearOfGraduation", student.getExpectedYearOfGraduation());
         studentJsonObject.put("savedProfessorList",
                 new JSONArray(
-                        student.getSavedProfessorList().stream().map(SavedProfessor::toSavedProfessorDTO).toArray())
+                        savedProfessorList != null
+                                ? savedProfessorList.stream().map(SavedProfessor::toSavedProfessorDTO).toArray()
+                                : new ArrayList<SavedProfessor>().toArray())
                         .toString());
         return studentJsonObject.toString();
     }

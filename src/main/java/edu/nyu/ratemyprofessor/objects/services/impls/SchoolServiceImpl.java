@@ -38,19 +38,25 @@ public class SchoolServiceImpl implements SchoolService {
                 .collect(Collectors.toList());
     }
 
-    public Map<String, Object> getSchool(Long id){
+    public School getSchoolById(Long id) {
+        return schoolRepository.findById(id).orElseThrow(
+                () -> new EntityNotFoundException(String.format("School with id %d could not be found", id)));
+    }
+
+    public Map<String, Object> getSchool(Long id) {
         Optional<School> school = schoolRepository.findById(id);
-        SchoolDTO schoolEntity = School.toSchoolDTO(school.orElseThrow(() -> new EntityNotFoundException("School not found with id: " + id)));
+        SchoolDTO schoolEntity = School
+                .toSchoolDTO(school.orElseThrow(() -> new EntityNotFoundException("School not found with id: " + id)));
 
         List<Professor> professorList = professorRepository.findBySchoolId(id);
         List<ProfessorDTO> professorDTOList = professorList.stream()
-                                                            .map(Professor::toProfessorDTO)
-                                                            .toList();
+                .map(Professor::toProfessorDTO)
+                .toList();
 
         Map<String, Object> response = new HashMap<>();
         response.put("school", schoolEntity);
         response.put("professor", professorDTOList);
-        
+
         return response;
     }
 }
