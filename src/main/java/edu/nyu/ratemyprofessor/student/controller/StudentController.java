@@ -124,4 +124,18 @@ public class StudentController {
     }
     return ResponseEntity.ok().body(Student.toJsonString(student));
   }
+
+  // @GetMapping("/ratings/{studentId}")
+  // public ResponseEntity<String> ratings(@PathVariable("studentId") Long studentId) {
+  //   Student student;
+  //   try {
+  //     student = studentService.getStudentDetailById(studentId);
+  //   } catch (EntityNotFoundException e) {
+  //     JSONObject jsonObject = new JSONObject();
+  //     jsonObject.put("error", String.format("Student with id %d cannot be found", studentId));
+  //     return ResponseEntity.badRequest().body(jsonObject.toString());
+  //   }
+
+  //   return ResponseEntity.ok().body(Student.toJsonString(student));
+  // }
 }

@@ -1,11 +1,14 @@
 package edu.nyu.ratemyprofessor;
 
+import edu.nyu.ratemyprofessor.objects.models.Rating;
 import edu.nyu.ratemyprofessor.objects.models.School;
 import edu.nyu.ratemyprofessor.objects.repos.SchoolRepository;
+import edu.nyu.ratemyprofessor.objects.services.interfaces.RatingService;
 import edu.nyu.ratemyprofessor.professor.model.Professor;
 import edu.nyu.ratemyprofessor.professor.repo.ProfessorRepository;
-import edu.nyu.ratemyprofessor.student.controller.StudentServiceImpl;
+import edu.nyu.ratemyprofessor.student.controller.StudentService;
 import edu.nyu.ratemyprofessor.student.model.Student;
+import edu.nyu.ratemyprofessor.utils.Grade;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -21,22 +24,26 @@ import java.util.Iterator;
 import java.io.InputStream;
 import org.springframework.core.io.Resource;
 
+import java.time.LocalDateTime;
+
 @Configuration
 public class Config {
 
     private final SchoolRepository schoolRepository;
     private final ProfessorRepository professorRepository;
-    private final StudentServiceImpl studentServiceImpl;
+    private final StudentService studentService;
+    private final RatingService ratingService;
     private ApplicationContext applicationContext;
 
     @Autowired
     public Config(SchoolRepository schoolRepository, ProfessorRepository professorRepository,
             ApplicationContext applicationContext,
-            StudentServiceImpl studentServiceImpl) {
+            StudentService studentService, RatingService ratingService) {
         this.schoolRepository = schoolRepository;
         this.professorRepository = professorRepository;
-        this.studentServiceImpl = studentServiceImpl;
+        this.studentService = studentService;
         this.applicationContext = applicationContext;
+        this.ratingService = ratingService;
     }
 
     @Bean
@@ -139,12 +146,15 @@ public class Config {
                         "123456",
                         "Jay",
                         NYU.getId());
-
                 student.setSchool(NYU);
                 student.setExpectedYearOfGraduation(2025);
 
-                studentServiceImpl.addNewStudent(student);
-
+                studentService.addNewStudent(student);
+                Professor professor = professorRepository.findById(1L).orElseThrow(() -> new EntityNotFoundException());
+                Rating rating = new Rating((float) 5.0, (float) 2.5, true, true, true, Grade.A, "Good professor", 1L,
+                        student.getId(),
+                        LocalDateTime.now(), professor, student);
+                ratingService.addRating(rating);
             }
         };
     }

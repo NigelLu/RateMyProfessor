@@ -7,8 +7,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.UniqueConstraint;
 
-import java.lang.reflect.Array;
-import java.sql.Savepoint;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;

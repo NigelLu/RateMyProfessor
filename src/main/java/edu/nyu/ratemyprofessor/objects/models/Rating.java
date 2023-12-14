@@ -9,9 +9,11 @@ import edu.nyu.ratemyprofessor.professor.model.Professor;
 import edu.nyu.ratemyprofessor.student.model.Student;
 import edu.nyu.ratemyprofessor.utils.Grade;
 import lombok.Data;
+import lombok.RequiredArgsConstructor;
 
 @Data
 @Entity
+@RequiredArgsConstructor
 public class Rating {
 
     @Id
@@ -39,6 +41,24 @@ public class Rating {
 
     private LocalDateTime dateTime;
 
+    public Rating(Float rating, Float difficulty, boolean takeAgain, boolean takenForCredit,
+            boolean attendanceMandatory, Grade grade, String review, Long professorId, Long studentId,
+            LocalDateTime dateTime, Professor professor, Student student) {
+
+        this.rating = rating;
+        this.difficulty = difficulty;
+        this.takeAgain = takeAgain;
+        this.takenForCredit = takenForCredit;
+        this.attendanceMandatory = attendanceMandatory;
+        this.grade = grade;
+        this.review = review;
+        this.professorId = professorId;
+        this.studentId = studentId;
+        this.dateTime = dateTime;
+        this.professor = professor;
+        this.student = student;
+    }
+
     @ManyToOne
     @JoinColumn(name = "professor")
     private Professor professor;
@@ -61,6 +81,10 @@ public class Rating {
         dto.setReview(rating.getReview());
         dto.setDateTime(rating.getDateTime());
         dto.setStudentId(rating.getStudentId());
+        dto.setProfessorFirstName(rating.getProfessor().getFirstName());
+        dto.setProfessorLastName(rating.getProfessor().getLastName());
+        dto.setProfessorSchoolName(rating.getProfessor().getSchoolName());
+
         return dto;
     }
 

@@ -23,6 +23,12 @@ public class RatingDTO {
 
     private Long professorId;
 
+    private String professorFirstName;
+
+    private String professorLastName;
+
+    private String professorSchoolName;
+
     private Long studentId;
 
     private LocalDateTime dateTime;
@@ -115,6 +121,43 @@ public class RatingDTO {
         this.dateTime = dateTime;
     }
 
-    
-    
+    public boolean getTakeAgain() {
+        return this.takeAgain;
+    }
+
+
+    public boolean getTakenForCredit() {
+        return this.takenForCredit;
+    }
+
+
+    public boolean getAttendanceMandatory() {
+        return this.attendanceMandatory;
+    }
+
+
+    public String getProfessorFirstName() {
+        return this.professorFirstName;
+    }
+
+    public void setProfessorFirstName(String professorFirstName) {
+        this.professorFirstName = professorFirstName;
+    }
+
+    public String getProfessorLastName() {
+        return this.professorLastName;
+    }
+
+    public void setProfessorLastName(String professorLastName) {
+        this.professorLastName = professorLastName;
+    }
+
+    public String getProfessorSchoolName() {
+        return this.professorSchoolName;
+    }
+
+    public void setProfessorSchoolName(String professorSchoolName) {
+        this.professorSchoolName = professorSchoolName;
+    }
+
 }
