@@ -1,7 +1,5 @@
 package edu.nyu.ratemyprofessor.objects.services.impls;
 
-import java.util.Optional;
-
 import javax.persistence.EntityNotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +28,7 @@ public class SavedProfessorServiceImpl implements SavedProfessorService {
     }
 
     @Override
-    public SavedProfessor addSavedProfessor(SavedProfessor savedProfessor) throws Exception{
+    public SavedProfessor addSavedProfessor(SavedProfessor savedProfessor) throws Exception {
         Long studentId = savedProfessor.getStudentId();
         Long professorId = savedProfessor.getProfessorId();
 
@@ -41,11 +39,10 @@ public class SavedProfessorServiceImpl implements SavedProfessorService {
             throw new Exception("Saved professor exists");
         }
 
-        Optional<Student> studentOptional = studentRepository.findById(studentId);
-        Optional<Professor> professorOptional = professorRepository.findById(professorId);
-        
-        Student student = studentOptional.orElseThrow(() -> new EntityNotFoundException("User not found with id: " + savedProfessor.getStudentId()));
-        Professor professor = professorOptional.orElseThrow(() -> new EntityNotFoundException("Professor not found with id: " + savedProfessor.getProfessorId()));
+        Student student = studentRepository.findById(studentId).orElseThrow(
+                () -> new EntityNotFoundException("User not found with id: " + savedProfessor.getStudentId()));
+        Professor professor = professorRepository.findById(professorId).orElseThrow(
+                () -> new EntityNotFoundException("Professor not found with id: " + savedProfessor.getProfessorId()));
 
         savedProfessor.setStudent(student);
         savedProfessor.setProfessor(professor);
@@ -55,9 +52,9 @@ public class SavedProfessorServiceImpl implements SavedProfessorService {
     }
 
     @Override
-    public void deleteSavedProfessor(Long id) {
-        Optional<SavedProfessor> savedProfessorOptional = savedProfessorRepository.findById(id);
-        savedProfessorOptional.orElseThrow(() -> new EntityNotFoundException("Saved professor with id:" + id + " not exists"));
-        savedProfessorRepository.deleteById(id);
+    public void deleteSavedProfessor(Long studentId, Long professorId) throws EntityNotFoundException {
+        SavedProfessor savedProfessor = savedProfessorRepository.findByStudentIdAndProfessorId(studentId, professorId)
+                .orElseThrow(() -> new EntityNotFoundException("Failed to find the saved professor record"));
+        savedProfessorRepository.deleteById(savedProfessor.getId());
     }
 }

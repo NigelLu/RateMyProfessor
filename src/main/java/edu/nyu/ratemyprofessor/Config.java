@@ -1,9 +1,11 @@
 package edu.nyu.ratemyprofessor;
 
 import edu.nyu.ratemyprofessor.objects.models.Rating;
+import edu.nyu.ratemyprofessor.objects.models.SavedProfessor;
 import edu.nyu.ratemyprofessor.objects.models.School;
 import edu.nyu.ratemyprofessor.objects.repos.SchoolRepository;
 import edu.nyu.ratemyprofessor.objects.services.interfaces.RatingService;
+import edu.nyu.ratemyprofessor.objects.services.interfaces.SavedProfessorService;
 import edu.nyu.ratemyprofessor.professor.model.Professor;
 import edu.nyu.ratemyprofessor.professor.repo.ProfessorRepository;
 import edu.nyu.ratemyprofessor.student.controller.StudentService;
@@ -33,17 +35,19 @@ public class Config {
     private final ProfessorRepository professorRepository;
     private final StudentService studentService;
     private final RatingService ratingService;
+    private final SavedProfessorService savedProfessorService;
     private ApplicationContext applicationContext;
 
     @Autowired
     public Config(SchoolRepository schoolRepository, ProfessorRepository professorRepository,
             ApplicationContext applicationContext,
-            StudentService studentService, RatingService ratingService) {
+            StudentService studentService, RatingService ratingService, SavedProfessorService savedProfessorService) {
         this.schoolRepository = schoolRepository;
         this.professorRepository = professorRepository;
         this.studentService = studentService;
         this.applicationContext = applicationContext;
         this.ratingService = ratingService;
+        this.savedProfessorService = savedProfessorService;
     }
 
     @Bean
@@ -155,6 +159,10 @@ public class Config {
                         student.getId(),
                         LocalDateTime.now(), professor, student);
                 ratingService.addRating(rating);
+                SavedProfessor savedProfessor = new SavedProfessor();
+                savedProfessor.setStudentId(student.getId());
+                savedProfessor.setProfessorId(professor.getId());
+                savedProfessorService.addSavedProfessor(savedProfessor);
             }
         };
     }

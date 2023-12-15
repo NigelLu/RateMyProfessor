@@ -9,8 +9,8 @@ import lombok.Data;
 
 @Data
 @Entity
-public class SavedProfessor{
-    
+public class SavedProfessor {
+
     @Id
     @SequenceGenerator(name = "savedProfessorSequence", sequenceName = "savedProfessorSequence", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "savedProfessorSequence")

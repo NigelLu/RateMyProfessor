@@ -14,8 +14,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.fasterxml.jackson.databind.node.ObjectNode;
-
 import edu.nyu.ratemyprofessor.objects.models.Rating;
 import edu.nyu.ratemyprofessor.objects.models.SavedProfessor;
 import edu.nyu.ratemyprofessor.objects.services.interfaces.RatingService;
@@ -77,10 +75,9 @@ public class InteractionController {
     }
 
     @DeleteMapping(path = "save")
-    public ResponseEntity<?> deleteSavedProfessor(@RequestBody ObjectNode objectNode) {
+    public ResponseEntity<?> deleteSavedProfessor(@RequestBody SavedProfessor savedProfessor) {
         try {
-            Long id = objectNode.get("id").asLong();
-            savedProfessorService.deleteSavedProfessor(id);
+            savedProfessorService.deleteSavedProfessor(savedProfessor.getStudentId(), savedProfessor.getProfessorId());
             return ResponseEntity.ok(true);
         } catch (EntityNotFoundException e) {
             return ResponseEntity.internalServerError().body(e.getMessage());
