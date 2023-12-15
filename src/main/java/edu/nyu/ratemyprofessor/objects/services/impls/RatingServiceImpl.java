@@ -1,7 +1,6 @@
 package edu.nyu.ratemyprofessor.objects.services.impls;
 
 import java.time.LocalDateTime;
-import java.util.Optional;
 
 import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
@@ -38,12 +37,9 @@ public class RatingServiceImpl implements RatingService {
         Long studentId = rating.getStudentId();
         Long professorId = rating.getProfessorId();
 
-        Optional<Student> studentOptional = studentRepository.findById(studentId);
-        Optional<Professor> professorOptional = professorRepository.findById(professorId);
-
-        Student student = studentOptional
+        Student student = studentRepository.findById(studentId)
                 .orElseThrow(() -> new EntityNotFoundException("User not found with id: " + rating.getStudentId()));
-        Professor professor = professorOptional.orElseThrow(
+        Professor professor = professorRepository.findById(professorId).orElseThrow(
                 () -> new EntityNotFoundException("Professor not found with id: " + rating.getProfessorId()));
 
         rating.setStudent(student);
