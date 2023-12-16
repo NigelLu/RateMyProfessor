@@ -82,6 +82,17 @@ public class Student {
         this.schoolId = schoolId;
     }
 
+    public Student(@NonNull @Email(message = "User email is invalid") String email, @NonNull @NotBlank String lastName,
+            @NonNull @NotBlank String password, @NonNull @NotBlank String firstName, Long schoolId,
+            Integer expectedYearOfGraduation) {
+        this.email = email;
+        this.lastName = lastName;
+        this.password = password;
+        this.firstName = firstName;
+        this.schoolId = schoolId;
+        this.expectedYearOfGraduation = expectedYearOfGraduation;
+    }
+
     public static StudentDTO toStudentDTO(Student student) {
         StudentDTO dto = new StudentDTO();
         dto.setId(student.getId());

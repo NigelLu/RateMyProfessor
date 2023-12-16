@@ -8,7 +8,7 @@ public class StudentRegisterPOJO {
   private String password;
   private String lastName;
   private String firstName;
-  private Number expectedYearOfGraduation;
+  private Integer expectedYearOfGraduation;
 
   public boolean hasAllRequiredFields() {
     Field[] fields = this.getClass().getDeclaredFields();
@@ -43,11 +43,11 @@ public class StudentRegisterPOJO {
     this.firstName = firstName;
   }
 
-  public Number getExpectedYearOfGraduation() {
+  public Integer getExpectedYearOfGraduation() {
     return this.expectedYearOfGraduation;
   }
 
-  public void setExpectedYearOfGraduation(Number expectedYearOfGraduation) {
+  public void setExpectedYearOfGraduation(Integer expectedYearOfGraduation) {
     this.expectedYearOfGraduation = expectedYearOfGraduation;
   }
 

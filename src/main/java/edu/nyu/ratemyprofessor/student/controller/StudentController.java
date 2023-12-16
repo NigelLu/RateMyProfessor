@@ -71,7 +71,7 @@ public class StudentController {
     }
     Student newStudent = new Student(studentRegisterPOJO.getEmail(),
         studentRegisterPOJO.getLastName(), studentRegisterPOJO.getPassword(), studentRegisterPOJO.getFirstName(),
-        studentRegisterPOJO.getSchoolId());
+        studentRegisterPOJO.getSchoolId(), studentRegisterPOJO.getExpectedYearOfGraduation());
     newStudent.setSchool(school);
     try {
       newStudent = studentService.addNewStudent(newStudent);
@@ -126,16 +126,18 @@ public class StudentController {
   }
 
   // @GetMapping("/ratings/{studentId}")
-  // public ResponseEntity<String> ratings(@PathVariable("studentId") Long studentId) {
-  //   Student student;
-  //   try {
-  //     student = studentService.getStudentDetailById(studentId);
-  //   } catch (EntityNotFoundException e) {
-  //     JSONObject jsonObject = new JSONObject();
-  //     jsonObject.put("error", String.format("Student with id %d cannot be found", studentId));
-  //     return ResponseEntity.badRequest().body(jsonObject.toString());
-  //   }
+  // public ResponseEntity<String> ratings(@PathVariable("studentId") Long
+  // studentId) {
+  // Student student;
+  // try {
+  // student = studentService.getStudentDetailById(studentId);
+  // } catch (EntityNotFoundException e) {
+  // JSONObject jsonObject = new JSONObject();
+  // jsonObject.put("error", String.format("Student with id %d cannot be found",
+  // studentId));
+  // return ResponseEntity.badRequest().body(jsonObject.toString());
+  // }
 
-  //   return ResponseEntity.ok().body(Student.toJsonString(student));
+  // return ResponseEntity.ok().body(Student.toJsonString(student));
   // }
 }
