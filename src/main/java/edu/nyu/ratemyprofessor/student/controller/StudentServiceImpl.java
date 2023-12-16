@@ -1,21 +1,21 @@
 package edu.nyu.ratemyprofessor.student.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
 
+import edu.nyu.ratemyprofessor.security.CustomPasswordEncoder;
 import edu.nyu.ratemyprofessor.student.model.Student;
 import edu.nyu.ratemyprofessor.student.repository.StudentRepository;
 
 @Service
 public class StudentServiceImpl implements StudentService {
-  private final PasswordEncoder passwordEncoder;
+  private final CustomPasswordEncoder passwordEncoder;
   private final StudentRepository studentRepository;
 
   @Autowired
-  public StudentServiceImpl(StudentRepository studentRepository, PasswordEncoder passwordEncoder) {
+  public StudentServiceImpl(StudentRepository studentRepository, CustomPasswordEncoder passwordEncoder) {
     this.passwordEncoder = passwordEncoder;
     this.studentRepository = studentRepository;
   }
