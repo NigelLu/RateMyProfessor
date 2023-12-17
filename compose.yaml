@@ -22,7 +22,7 @@ services:
       - rate-my-professor
 
   frontend:
-    build: ../RateMyProfUI
+    build: ../RateMyProfessorUI
     ports:
       - "3000:3000"
     networks:

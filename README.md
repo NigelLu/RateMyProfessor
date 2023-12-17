@@ -24,8 +24,8 @@
 
     ```txt
       ├── <folder_of_your_choice>
-      │   ├── RateMyProfUI
       │   ├── RateMyProfessor
+      │   ├── RateMyProfessorUI
     ```
 
 - Install Docker and make sure you have docker CLI available in your command line. Tutorial [here](https://docs.docker.com/engine/install/). After installing the Docker engine, you can test it using:
