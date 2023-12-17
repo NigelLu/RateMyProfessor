@@ -27,6 +27,8 @@
       │   ├── RateMyProfessor
       │   ├── RateMyProfessorUI
     ```
+  
+  - SPECIAL NOTICE: if you are on a Windows machine, the OS might change the line ending of `mvnw.cmd` and `mvnw` from LF into CRLF. Please make sure to change it back to LF for the docker build to work!!!
 
 - Install Docker and make sure you have docker CLI available in your command line. Tutorial [here](https://docs.docker.com/engine/install/). After installing the Docker engine, you can test it using:
 
